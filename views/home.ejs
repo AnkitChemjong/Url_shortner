@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body{
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>
+        Url Shortner
+    </h1>    
+    <%if(locals.id){%>
+    <p>URL Generated:http://localhost:8000/url/<%=id%></p>
+   <% } %>
+    <div>
+        <form method="POST" action="/url">
+             <label>
+                Enter Your Original URL
+             </label>
+             <input type="text" name="url" placeholder="https://examle.com"></input>
+             <button type="submit">Generate</button>
+        </form>
+    </div>
+    <div>
+    <% if (locals.urls){ %>
+          <table>
+            <thead>
+            <th>S.No</th>
+             <th>ShortID</th>
+             <th>RedirectURL</th>
+             <th>Clicks</th>
+             <th>CreatedBy</th>
+            </thead>
+             <tbody>
+                <% urls.forEach((url,index)=>{ %>
+                    <tr>
+                    <td><%=index+1%></td>
+                    <td><%=url.shortID%></td>
+                    <td><%=url.redirectURL%></td>
+                    <td><%=url.visitHistory.length%></td>
+                    <td><%=url.createdBy%></td>
+
+                    </tr>
+                    <% }) %>
+             </tbody>
+  
+          </table>
+           <% } %>
+    </div>
+</body>
+</html>
